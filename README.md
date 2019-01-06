@@ -4,6 +4,8 @@
 
 To test this code, clone the repo and open the example project. AutoGraphSharp generates the Tensorflow Graph creation code at compile time. 
 
+In a future release, a development NuGet package will be publihed. 
+
 ### Example
 
 This function:
