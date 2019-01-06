@@ -16,11 +16,6 @@ namespace AutoGraphSharp
         {
             _value = value;
         }
-        public AutoTFOutput(TFTensor value, TFSession session)
-        {
-            _session = session;
-            _value = value;
-        }
 
         public AutoTFOutput(TFOutput output, TFSession session)
         {
@@ -28,7 +23,7 @@ namespace AutoGraphSharp
             _output = output;
         }
 
-        public TFOutput Output
+            public TFOutput Output
         {
             get
             {
@@ -54,6 +49,11 @@ namespace AutoGraphSharp
         {
             var output = obj as AutoTFOutput;
             return Output.Equals(output.Output);
+        }
+
+        public override int GetHashCode()
+        {
+            return Output.GetHashCode();
         }
 
         public static AutoTFOutput operator +(AutoTFOutput a, AutoTFOutput b)
@@ -116,6 +116,32 @@ namespace AutoGraphSharp
             var session = GetSession(a, b);
             return new AutoTFOutput(session.Graph.NotEqual(a, b), session);
         }
+
+        public static AutoTFOutput operator &(AutoTFOutput a, AutoTFOutput b)
+        {
+            var session = GetSession(a, b);
+            return new AutoTFOutput(session.Graph.BitwiseAnd(a, b), session);
+        }
+
+        public static AutoTFOutput operator |(AutoTFOutput a, AutoTFOutput b)
+        {
+            var session = GetSession(a, b);
+            return new AutoTFOutput(session.Graph.BitwiseOr(a, b), session);
+        }
+        public static AutoTFOutput operator ^(AutoTFOutput a, AutoTFOutput b)
+        {
+            var session = GetSession(a, b);
+            return new AutoTFOutput(session.Graph.BitwiseXor(a, b), session);
+        }
+        public static bool operator true(AutoTFOutput a)
+        {
+            return a.Output.OutputType == TFDataType.Bool && (bool)a._session.GetRunner().Run(a._output.Value).GetValue();
+        }
+        public static bool operator false(AutoTFOutput a)
+        {
+            return a.Output.OutputType == TFDataType.Bool && !(bool)a._session.GetRunner().Run(a._output.Value).GetValue();
+        }
+
         public static AutoTFOutput operator !(AutoTFOutput a)
         {
             return new AutoTFOutput(a._session.Graph.LogicalNot(a), a._session);

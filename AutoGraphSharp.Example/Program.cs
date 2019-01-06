@@ -7,28 +7,29 @@ namespace AutoGraphSharp.Example
     partial class Program
     {
         [AutoGraph]
-        public static int Addition(int a, int b)
+        public static int Function(int a, int b)
         {
-            var c = (((a + b) * a + b * a) / b - a - 2) / 5;
+            var c = (a + b *3 )/a;
 
-            if (c == 0)
+            if (a > b)
             {
-                c = a + 1;
-                if (a > 0)
-                    c++;
+                c = 1;
+            }
+            else
+            {
+                c = 2;
             }
 
             return c;
         }
 
-       
         static void Main(string[] args)
         {
             using (var session = new TFSession())
             {
-                var add1 = Addition(2, 3, session);
-                var add2 = Addition(2, 3);
-                Debug.Assert(add1 == add2);
+                var result1 = Function(1, -1);
+                var result2 = Function(1, -1, session);
+                Debug.Assert(result1 == result2);
             }
         }
     }

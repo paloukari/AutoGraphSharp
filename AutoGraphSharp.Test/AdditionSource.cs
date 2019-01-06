@@ -7,14 +7,15 @@ namespace AutoGraphSharp.Test
         public int Addition(int a, int b)
         {
             var c = a + b;
-            if (c > 0)
+
+            if (c != 0)
             {
-                c = a + 1;
-                if (a > 0)
-                    c++;
+                c = 1;
             }
             else
-                c++;
+            {
+                c = 2;
+            }
 
             return c;
         }
