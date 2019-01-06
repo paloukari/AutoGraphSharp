@@ -56,4 +56,4 @@ will be automatically translated to this function:
             return c;
         }
         
->Note: This is a work in progress, far from complete. The first goal if to implement a generic if statement translation that will work for any C# if permutation. Once there, the rest of the C# language features (while loops, switch cases etc) will follow.  
+>Note: This is an incomplete work in progress. The first goal if to implement a generic **if statement** Graph translation that will work for any C# **if** permutation. Once there, the rest of the C# language features will follow (while loops, switch cases etc).
