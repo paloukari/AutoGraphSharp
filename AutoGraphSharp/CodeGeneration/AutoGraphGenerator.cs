@@ -1,5 +1,4 @@
-﻿using AutoGraphSharp.CodeGeneration;
-using CodeGeneration.Roslyn;
+﻿using CodeGeneration.Roslyn;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Validation;
 
-namespace AutoGraphSharp
+namespace AutoGraphSharp.CodeGeneration
 {
     class AutoGraphGenerator : ICodeGenerator
     {

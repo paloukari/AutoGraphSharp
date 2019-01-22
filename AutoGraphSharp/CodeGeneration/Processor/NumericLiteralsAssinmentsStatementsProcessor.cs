@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AutoGraphSharp.CodeRefactoring
+namespace AutoGraphSharp.CodeGeneration.Processor
 {
-    public class NumericLiteralsAssinmentsProcessor : IProcessor
+    public class NumericLiteralsAssinmentsStatementsProcessor : IProcessor
     {
         public SyntaxList<StatementSyntax> Refactor(SyntaxList<StatementSyntax> statements)
         {

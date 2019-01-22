@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFrameworks>net471;netcoreapp2.0</TargetFrameworks>
     <StartupObject>AutoGraphSharp.Test.Program</StartupObject>
   </PropertyGroup>
 
@@ -25,6 +25,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoGraphSharp\AutoGraphSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AdditionSource.expected">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@ namespace AutoGraphSharp.Example
         [AutoGraph]
         public static int Function(int a, int b)
         {
-            var c = (a + b *3 )/a;
+            int c = (a + b *3 )/a;
 
             if (a > b)
                 c = 1;
@@ -24,7 +24,7 @@ namespace AutoGraphSharp.Example
             using (var session = new TFSession())
             {
                 var result1 = Function(1, -1);
-                var result2 = Function(1, -1, session);
+                var result2 = Function(1, -1, session); 
                 Debug.Assert(result1 == result2);
             }
         }

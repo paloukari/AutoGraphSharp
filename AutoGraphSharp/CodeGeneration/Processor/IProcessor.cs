@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace AutoGraphSharp
+namespace AutoGraphSharp.CodeGeneration.Processor
 {
     public interface IProcessor
     {

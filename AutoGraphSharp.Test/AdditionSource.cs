@@ -1,12 +1,11 @@
-﻿
-namespace AutoGraphSharp.Test
+﻿namespace AutoGraphSharp.Test
 {
     public class AdditionSource
     {
         [AutoGraph(Prefix = "_")]
         public int Addition(int a, int b)
         {
-            var c = a + b;
+            int c = a + b;
 
             if (c != 0)
             {

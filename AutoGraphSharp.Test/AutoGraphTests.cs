@@ -15,7 +15,7 @@ namespace AutoGraphSharp.Test
         public void Addition()
         {
             var source = File.ReadAllText("../../../AdditionSource.cs");
-            var expected = "";
+            var expected = File.ReadAllText("../../../AdditionSource.expected");
 
             AssertGeneratedAsExpected(source, expected);
         }

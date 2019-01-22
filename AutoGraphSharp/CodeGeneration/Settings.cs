@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AutoGraphSharp
+namespace AutoGraphSharp.CodeGeneration
 {
     public class Settings
     {

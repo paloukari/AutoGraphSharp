@@ -1,0 +1,38 @@
+﻿namespace AutoGraphSharp.Test
+{
+    public class AdditionSource
+    {
+        [AutoGraph(Prefix = "_")]
+        public int _Addition(int a, int b, TensorFlow.TFSession session)
+        {
+            var runner = session.GetRunner();
+            var _a = new AutoTFOutput(session.Graph.Placeholder(TFTensor.TensorTypeFromType(a.GetType())), session);
+            runner.AddInput(_a, new TFTensor(a));
+            var _b = new AutoTFOutput(session.Graph.Placeholder(TFTensor.TensorTypeFromType(b.GetType())), session);
+            runner.AddInput(_b, new TFTensor(b));
+            return (int)runner.Run(__Addition(_a, _b, session)).GetValue();
+        }
+
+        [AutoGraph(Prefix = "_")]
+        public AutoTFOutput _Addition(AutoTFOutput a, AutoTFOutput b, TensorFlow.TFSession session)
+        {
+            var c = a + b;
+            var predicate1 = c != 0;
+            Func<Tuple<AutoTFOutput>> ifTrue1 = () =>
+            {
+            var _c = c;
+            _c = new AutoTFOutput(session.Graph.Const(1), session);
+            return Tuple.Create(_c);
+             } ; 
+            Func<Tuple<AutoTFOutput>> ifFalse1 = () =>
+            {
+            var _c = c;
+            _c = 2;
+            return Tuple.Create(_c);
+             } ; 
+            var res = new AutoCond<Tuple<AutoTFOutput>>(predicate1, ifTrue1, ifFalse1, session);
+            res.Deconstruct(out c);
+            return c;
+        }
+    }
+}

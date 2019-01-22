@@ -71,7 +71,7 @@ public abstract class CompilationTestsBase
         var tree = document.GetSyntaxTreeAsync().GetAwaiter().GetResult();
         var compilation = (CSharpCompilation)document.Project.GetCompilationAsync().GetAwaiter().GetResult();
         var diagnostics = compilation.GetDiagnostics();
-        //Assert.Empty(diagnostics.Where(x => x.Severity >= DiagnosticSeverity.Warning));
+        Assert.Empty(diagnostics.Where(x => x.Severity >= DiagnosticSeverity.Warning));
         var progress = new Progress<Diagnostic>();
         var result = DocumentTransform.TransformAsync(compilation, tree, null, Assembly.Load, progress).GetAwaiter().GetResult();
         return result.GetRoot().NormalizeWhitespace().SyntaxTree;

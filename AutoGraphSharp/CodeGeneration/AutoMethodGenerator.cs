@@ -1,4 +1,4 @@
-﻿using AutoGraphSharp.CodeRefactoring;
+﻿using AutoGraphSharp.CodeGeneration.Processor;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -54,22 +54,14 @@ namespace AutoGraphSharp.CodeGeneration
         }
         private MethodDeclarationSyntax GenerateBody(MethodDeclarationSyntax method)
         {
-            var mappedParams = new Dictionary<string, string>();
+            var bodyStatements = method.Body.Statements;
 
-            //replace all if statements
-            var statements = new SyntaxList<StatementSyntax>();
+            bodyStatements= new VariableDevlarationStatementsProcessor().Refactor(bodyStatements);
+            bodyStatements = new NumericLiteralsAssinmentsStatementsProcessor().Refactor(bodyStatements);
 
-            //statements = statements.Add(SyntaxFactory.ParseStatement("Func<AutoTFOutput> body = () => {"));
+            bodyStatements = new IfStatementsProcessor().Refactor(bodyStatements);
 
-            var bodyStatements = new IfStatementsProcessor().Refactor(method.Body.Statements);
-            statements = statements.AddRange(new NumericLiteralsAssinmentsProcessor().Refactor(bodyStatements));
-
-            //statements = statements.Add(SyntaxFactory.ParseStatement("};"));
-
-            //statements = statements.Add(SyntaxFactory.ParseStatement("var result = body();"));
-            //statements = statements.Add(SyntaxFactory.ParseStatement("return result;"));
-
-            var newBody = method.Body.WithStatements(statements);
+            var newBody = method.Body.WithStatements(bodyStatements);
             method = method.WithBody(newBody);
             return method;
         }

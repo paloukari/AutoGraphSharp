@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace AutoGraphSharp.CodeRefactoring
+namespace AutoGraphSharp.CodeGeneration.Processor
 {
     public class IfStatementsProcessor : IProcessor
     {
@@ -72,12 +72,7 @@ namespace AutoGraphSharp.CodeRefactoring
             newStatements = newStatements.Add(refactoredIf1);
             newStatements = newStatements.Add(refactoredIf2);
 
-            //add the continuation code
-            //newStatements = newStatements.Add(SyntaxFactory.ParseStatement($"Func <AutoTFOutput> res{ifCounter} = () => {{"));
             newStatements = newStatements.AddRange(RefactorIfStatements(new SyntaxList<StatementSyntax>(nextStatements), ifCounter));
-            //if (ifCounter > 1)
-            //    newStatements = newStatements.Add(SyntaxFactory.ParseStatement($"return res{ifCounter - 1}();"));
-            //newStatements = newStatements.Add(SyntaxFactory.ParseStatement("};"));
             return newStatements;
         }
 

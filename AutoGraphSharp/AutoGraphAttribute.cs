@@ -6,7 +6,7 @@ using Validation;
 namespace AutoGraphSharp
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
-    [CodeGenerationAttribute(typeof(AutoGraphGenerator))]
+    [CodeGenerationAttribute(typeof(CodeGeneration.AutoGraphGenerator))]
     [Conditional("CodeGeneration")]
     public class AutoGraphAttribute : Attribute
     {
