@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutoGraphSharp.Core\AutoGraphSharp.Core.csproj" />
+    <ProjectReference Include="..\AutoGraphSharp\AutoGraphSharp.csproj" />
   </ItemGroup>
 
 </Project>
